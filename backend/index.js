@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 const app = express();
 const PORT = 5000;
@@ -11,10 +12,10 @@ app.use(express.json());
 // Database connection pool
 // IMPORTANT: Update user and password with your MySQL local credentials!
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '1159', // Change this to your MySQL password
-    database: 'MR',
+    host:process.env.DB_HOST,
+    user:process.env.DB_USER,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_NAME,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
